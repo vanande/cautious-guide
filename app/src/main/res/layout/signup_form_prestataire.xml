@@ -104,7 +104,6 @@
             android:layout_weight="0.5"
             android:hint="Prénom"
             android:padding="12dp"
-            android:marginLeft="dp"
             android:textColor="@color/primary"
             android:textSize="16sp" />
 
@@ -165,7 +164,7 @@
 
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="S'inscrire"

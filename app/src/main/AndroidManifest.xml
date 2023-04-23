@@ -16,10 +16,14 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".form.Login"></activity>
+        <activity android:name=".form.Login_form_company"></activity>
+        <activity android:name=".form.Login_form_prestataire"></activity>
+        <activity android:name=".form.Signup_form_company"></activity>
+        <activity android:name=".form.Signup_form_prestataire"></activity>
     </application>
 
 </manifest>

@@ -16,7 +16,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/primary_logo"
+            android:src="@drawable/icone"
+            android:scaleType="centerCrop"
             android:padding="16dp"/>
         <TextView
             android:layout_width="wrap_content"

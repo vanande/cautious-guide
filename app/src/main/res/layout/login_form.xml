@@ -44,7 +44,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal">
 
         <RadioButton
@@ -84,11 +83,11 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/token"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Jeton d'authentification..."
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:padding="12dp"
         android:textColor="@color/primary"
         android:textColorHint="@color/primary"

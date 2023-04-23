@@ -83,17 +83,6 @@
 
     </LinearLayout>
 
-
-    <EditText
-        android:id="@+id/dev_token"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="DEV ONLY ! DEV ONLY !! DEV ONLY !! DEV ONLY !!!"
-        android:padding="12dp"
-        android:textColor="@color/primary"
-        android:textColorHint="#DD0A0A"
-        android:textSize="16sp" />
-
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -122,6 +111,7 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
     <TextView
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"

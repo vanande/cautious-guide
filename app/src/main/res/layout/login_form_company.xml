@@ -114,6 +114,7 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
     <TextView
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
@@ -130,12 +131,6 @@
 
         android:src="@drawable/login_page" />
 
-    <EditText
-        android:id="@+id/dev_token"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:textColor="@color/primary"
-        android:textSize="16sp" />
+
 
 </LinearLayout>
