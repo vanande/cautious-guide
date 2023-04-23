@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="company_types">
+        <item>Société à responsabilité limitée (SARL)</item>
+        <item>Société anonyme (SA)</item>
+        <item>Société par actions simplifiée (SAS)</item>
+    </string-array>
+    <string-array name="metiers_type">
+        <item>Acteur</item>
+        <item>Chanteur</item>
+        <item>Coach de combats de sumo</item>
+        <item>Coach de survie</item>
+        <item>Coach en développement personnel</item>
+        <item>Comédien</item>
+        <item>Designer d\'expériences de réalité virtuelle</item>
+        <item>Expert en communications</item>
+        <item>Expert en création de pyramides humaines</item>
+        <item>Gourou de la méditation</item>
+        <item>Hypnotiseur</item>
+        <item>Magicien</item>
+        <item>Maître de cérémonie</item>
+        <item>Maître en arts martiaux</item>
+        <item>Nain</item>
+        <item>Ninja</item>
+        <item>Prêtre</item>
+    </string-array>
+</resources>
