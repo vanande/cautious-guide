@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tas.HomeActivity;
 import com.example.tas.R;
 
 import org.json.JSONException;
@@ -84,6 +85,9 @@ public class Login_form_employee extends AppCompatActivity {
                     }
                 });
                 queue.add(stringRequest);
+
+                Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
 
