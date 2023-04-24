@@ -42,7 +42,7 @@ public class Signup_form_company extends AppCompatActivity {
         employee_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Signup_form_company.this, Login.class);
+                Intent intent = new Intent(Signup_form_company.this, Login_form_employee.class);
                 startActivity(intent);
             }
         });

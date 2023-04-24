@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.tas.form.Login;
+import com.example.tas.form.Login_form_employee;
 
 public class MainActivity extends AppCompatActivity {
     private Button login_btn;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, Login_form_employee.class);
                 startActivity(intent);
             }
         });
