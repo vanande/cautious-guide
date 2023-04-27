@@ -43,7 +43,7 @@ public class Login_form_employee extends AppCompatActivity {
         error_view = (TextView) findViewById(R.id.error);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://10.0.2.2:9000/auth/LoginSalary";
+        String url = "https://141.94.236.34:9000/auth/LoginSalary";
         String jsonBody = "{\"token\":\"111\"}";
         try {
             JSONObject requestBody = new JSONObject(jsonBody);
@@ -84,10 +84,12 @@ public class Login_form_employee extends AppCompatActivity {
                         error_view.setText("That didn't work!" + error.toString());
                     }
                 });
+
                 queue.add(stringRequest);
 
-                Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
+                //startActivity(intent);
+
             }
         });
 
