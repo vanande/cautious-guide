@@ -79,7 +79,18 @@ public class Login_form_employee extends AppCompatActivity {
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         response -> {
                             Log.d("Response", response);
+
+                            JSONObject jsonResponse = new JSONObject(response);
+
+                            int idc = jsonResponse.getInt("idc");
+                            int ide = jsonResponse.getInt("ide");
+                            int idp = jsonResponse.getInt("idp");
+
                             Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
+                            intent.putExtra("token", token.getText().toString());
+                            intent.putExtra("idc", idc);
+                            intent.putExtra("ide", ide);
+                            intent.putExtra("idp", idp);
                             startActivity(intent);
                         },
                         error -> {
