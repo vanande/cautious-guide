@@ -1,11 +1,15 @@
 package com.example.tas.form;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,19 +17,39 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tas.HomeActivity;
+import com.example.tas.MySingleton;
 import com.example.tas.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.text.Collator;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+
 
 public class Login_form_employee extends AppCompatActivity {
-    private Button employee_button;
-    private Button company_button;
-    private Button prestataire_button;
     private EditText token;
     private Button login_btn;
     private TextView error_view;
@@ -35,62 +59,55 @@ public class Login_form_employee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_form);
 
-        employee_button = (Button) findViewById(R.id.employee_button);
-        company_button = (Button) findViewById(R.id.company_button);
-        prestataire_button = (Button) findViewById(R.id.prestataire_button);
         token = (EditText) findViewById(R.id.token);
         login_btn = (Button) findViewById(R.id.login_btn);
         error_view = (TextView) findViewById(R.id.error);
-
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://141.94.236.34:9000/auth/LoginSalary";
-        String jsonBody = "{\"token\":\"111\"}";
-        try {
-            JSONObject requestBody = new JSONObject(jsonBody);
-        } catch (JSONException e) {
-            System.err.println("Error creating JSON object");
-        }
 
-        company_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login_form_employee.this, Login_form_company.class);
-                startActivity(intent);
-            }
-        });
-
-        prestataire_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login_form_employee.this, Login_form_prestataire.class);
-                startActivity(intent);
-            }
-        });
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Request a string response from the provided URL.
+                JSONObject jsonBody = new JSONObject();
+                try {
+                    jsonBody.put("token", token.getText().toString());
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                String url = "https://www.togetherandstronger.fr:9000/auth/LoginSalary";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                error_view.setText("Response is: " + response.substring(0,500));
+                        response -> {
+                            Log.d("Response", response);
+                            Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
+                            startActivity(intent);
+                        },
+                        error -> {
+                            if (error.networkResponse != null) {
+                                Log.d("VolleyError", "Status code: " + error.networkResponse.statusCode);
+                                if (error.networkResponse.data != null) {
+                                    String errorBody = new String(error.networkResponse.data);
+                                    Log.d("VolleyError", "Error body: " + errorBody);
+                                }
                             }
-                        }, new Response.ErrorListener() {
+                            error_view.setText(error.toString());
+                        }
+                ) {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error_view.setText("That didn't work!" + error.toString());
+                    public byte[] getBody() {
+                        return jsonBody.toString().getBytes();
                     }
-                });
 
-                queue.add(stringRequest);
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json";
+                    }
+                };
 
-                //Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
-                //startActivity(intent);
-
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                requestQueue.add(stringRequest);
             }
+
         });
 
 
