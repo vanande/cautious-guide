@@ -3,15 +3,13 @@ package com.example.tas;
 public class Activite {
     private String nom;
     private String description;
-    private String[] type;
-    private String image;
+    private String type;
 
 
-    public Activite(String nom, String description, String[] type, String image) {
+    public Activite(String nom, String description, String type) {
         this.nom = nom;
         this.description = description;
         this.type = type;
-        this.image = image;
     }
 
     public String getNom() {
@@ -30,16 +28,11 @@ public class Activite {
         this.description = description;
     }
 
+    public String getType() {
+        return type;
+    }
 
-    public void setType(String[] type) {
+    public void setType(String type) {
         this.type = type;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

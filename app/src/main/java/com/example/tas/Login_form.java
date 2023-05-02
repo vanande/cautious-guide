@@ -1,55 +1,25 @@
-package com.example.tas.form;
+package com.example.tas;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.tas.HomeActivity;
-import com.example.tas.MySingleton;
-import com.example.tas.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-import java.text.Collator;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-
-
-public class Login_form_employee extends AppCompatActivity {
+public class Login_form extends AppCompatActivity {
     private EditText token;
     private Button login_btn;
     private TextView error_view;
@@ -80,17 +50,44 @@ public class Login_form_employee extends AppCompatActivity {
                         response -> {
                             Log.d("Response", response);
 
-                            JSONObject jsonResponse = new JSONObject(response);
+                            JSONObject jsonResponse = null;
+                            try {
+                                jsonResponse = new JSONObject(response);
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
 
-                            int idc = jsonResponse.getInt("idc");
-                            int ide = jsonResponse.getInt("ide");
-                            int idp = jsonResponse.getInt("idp");
+                            int idc = 0;
+                            try {
+                                idc = jsonResponse.getInt("idc");
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                            int idp = 0;
+                            try {
+                                idp = jsonResponse.getInt("idp");
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                            String nom = null;
+                            try {
+                                nom = jsonResponse.getString("nom");
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                            String prenom = null;
+                            try {
+                                prenom = jsonResponse.getString("prenom");
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
 
-                            Intent intent = new Intent(Login_form_employee.this, HomeActivity.class);
+                            Intent intent = new Intent(Login_form.this, HomeActivity.class);
                             intent.putExtra("token", token.getText().toString());
                             intent.putExtra("idc", idc);
-                            intent.putExtra("ide", ide);
                             intent.putExtra("idp", idp);
+                            intent.putExtra("nom", nom);
+                            intent.putExtra("prenom", prenom);
                             startActivity(intent);
                         },
                         error -> {
@@ -101,7 +98,7 @@ public class Login_form_employee extends AppCompatActivity {
                                     Log.d("VolleyError", "Error body: " + errorBody);
                                 }
                             }
-                            error_view.setText(error.toString());
+                            error_view.setText("Mauvais token");
                         }
                 ) {
                     @Override

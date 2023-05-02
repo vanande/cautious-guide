@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".form.Login_form_employee"></activity>
+        <activity android:name=".Login_form"></activity>
         <activity android:name=".HomeActivity"></activity>
     </application>
 

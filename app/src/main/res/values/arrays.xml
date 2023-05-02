@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="company_types">
+    <string-array name="company">
         <item>Société à responsabilité limitée (SARL)</item>
         <item>Société anonyme (SA)</item>
         <item>Société par actions simplifiée (SAS)</item>
     </string-array>
-    <string-array name="metiers_type">
+    <string-array name="metiers">
         <item>Acteur</item>
         <item>Chanteur</item>
         <item>Coach de combats de sumo</item>
@@ -23,5 +23,19 @@
         <item>Nain</item>
         <item>Ninja</item>
         <item>Prêtre</item>
+    </string-array>
+    <string-array name="info_options">
+        <item>Sélectionnez une option</item>
+        <item>Enceinte</item>
+        <item>Obèse</item>
+        <item>Diabétique</item>
+        <item>Handicapé</item>
+        <item>Fragile</item>
+        <item>Autiste</item>
+        <item>Sportif</item>
+        <item>Fumeur</item>
+        <item>Allergies</item>
+        <item>Végétarien</item>
+        <item>Prend des médicaments</item>
     </string-array>
 </resources>

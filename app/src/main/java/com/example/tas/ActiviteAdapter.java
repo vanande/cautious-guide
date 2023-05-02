@@ -41,15 +41,17 @@ public class ActiviteAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(this.context);
             view = inflater.inflate(R.layout.activite_item, null);
         }
+
         TextView nom = view.findViewById(R.id.nom_activite);
-        ImageView Image = view.findViewById(R.id.image_activite);
-        TextView description = view.findViewById(R.id.description_activite);
-        TextView type = view.findViewById(R.id.type_activite);
+        TextView t = view.findViewById(R.id.type_activite);
+        TextView d = view.findViewById(R.id.description_activite);
+
 
         Activite current =  (Activite) getItem(i);
 
         nom.setText(current.getNom());
-        description.setText(current.getDescription());
+        t.setText(current.getType());
+        d.setText(current.getDescription());
 
         return view;
     }
