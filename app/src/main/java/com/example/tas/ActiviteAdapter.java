@@ -11,14 +11,15 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ActiviteAdapter extends BaseAdapter {
-    private List<Activite> activites;
+
+    private List<Activite> la;
     private Context context;
 
-
-    public ActiviteAdapter(List<Activite> activites, Context context) {
-        this.activites = activites;
+    public ActiviteAdapter(List<Activite> la, Context context) {
+        this.la = la;
         this.context = context;
     }
+
 
     @Override
     public int getCount() {
@@ -35,6 +36,7 @@ public class ActiviteAdapter extends BaseAdapter {
         return 0;
     }
 
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
@@ -42,15 +44,12 @@ public class ActiviteAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.activite_item, null);
         }
 
-        TextView nom = view.findViewById(R.id.nom_activite);
-        TextView t = view.findViewById(R.id.type_activite);
-        TextView d = view.findViewById(R.id.description_activite);
-
+        TextView n = view.findViewById(R.id.a_nom);
+        TextView d = view.findViewById(R.id.a_description);
 
         Activite current =  (Activite) getItem(i);
 
-        nom.setText(current.getNom());
-        t.setText(current.getType());
+        n.setText(current.getNom());
         d.setText(current.getDescription());
 
         return view;

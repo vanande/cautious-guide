@@ -18,29 +18,40 @@ public class HomeActivity extends AppCompatActivity {
     private Button my_profile;
     private ListView lv_a;
 
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //Intent intent = getIntent();
-        //String message = "Bienvenue " + intent.getStringExtra("prenom") + " !";
-        //Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        this.my_activities = findViewById(R.id.my_activities);
+        this.my_profile = findViewById(R.id.my_profile);
+        this.lv_a = findViewById(R.id.lv);
 
-        //my_activities = (Button) findViewById(R.id.my_activities_button);
-        //my_profile = (Button) findViewById(R.id.my_profile_button);
-        lv_a = (ListView) findViewById(R.id.list_tb);
+        ActiviteAdapter aa = new ActiviteAdapter(getActivites(), HomeActivity.this);
+        this.lv_a.setAdapter(aa);
 
-        ActiviteAdapter activiteAdapter = new ActiviteAdapter(  getActivites(), HomeActivity.this);
-        lv_a.setAdapter(activiteAdapter);
+        this.my_activities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MyActivities.class);
+                startActivity(intent);
+            }
+        });
+
+        this.my_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MyProfile.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public List<Activite> getActivites() {
         List<Activite> la = new ArrayList<>();
-
-        la.add(new Activite("1 vs 1 Samuraï", "Armez vous et participer à l'évènement le plus meurtrier de cette année !", "Stratégie, Combat"));
-        la.add(new Activite("Escape Game", "Vous avez 60 minutes pour vous échapper de la pièce !","Stratégie, Réflexion"));
-        la.add(new Activite("Tournoi de foot", "Participez à un tournoi de foot en salle !", "Jeux d'équipe, Sportif"));
+        la.add(new Activite("Paintball", "Jeu de tir en équipe"));
+        la.add(new Activite("Bowling", "Jeu de quilles"));
+        la.add(new Activite("Karting", "Course de kart"));
         return la;
     }
 }
