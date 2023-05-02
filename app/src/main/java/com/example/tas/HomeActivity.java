@@ -26,11 +26,6 @@ public class HomeActivity extends AppCompatActivity {
 
         this.my_activities = findViewById(R.id.my_activities);
         this.my_profile = findViewById(R.id.my_profile);
-        this.lv_a = findViewById(R.id.lv);
-
-        ActiviteAdapter aa = new ActiviteAdapter(getActivites(), HomeActivity.this);
-        this.lv_a.setAdapter(aa);
-
 
         this.lv_b = findViewById(R.id.lv);
 
@@ -52,14 +47,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    public List<Activite> getActivites() {
-        List<Activite> la = new ArrayList<>();
-        la.add(new Activite("Paintball", "Jeu de tir en équipe"));
-        la.add(new Activite("Bowling", "Jeu de quilles"));
-        la.add(new Activite("Karting", "Course de kart"));
-        return la;
     }
 
     public List<Burger> getMenu(){

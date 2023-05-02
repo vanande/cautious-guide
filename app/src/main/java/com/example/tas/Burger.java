@@ -38,6 +38,4 @@ public class Burger {
         this.prix = prix;
     }
 
-
-
 }
