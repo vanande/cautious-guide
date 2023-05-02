@@ -1,7 +1,6 @@
 package com.example.tas;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class BurgerAdapter extends BaseAdapter {
+public class ActiviteAdapter extends BaseAdapter {
 
-    private List<Burger> lburgers;
+    private List<Activite> la;
     private Context context;
 
-    public BurgerAdapter(List<Burger> lburgers, Context context) {
-        this.lburgers = lburgers;
+    public ActiviteAdapter(List<Activite> la, Context context) {
+        this.la = la;
         this.context = context;
     }
 
@@ -24,12 +23,12 @@ public class BurgerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return this.lburgers.size();
+        return this.la.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return this.lburgers.get(i);
+        return this.la.get(i);
     }
 
     @Override
@@ -41,16 +40,16 @@ public class BurgerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null){
             LayoutInflater inflater = LayoutInflater.from(this.context);
-            view = inflater.inflate(R.layout.burger_item, null);
+            view = inflater.inflate(R.layout.activite_item, null);
         }
 
-        TextView nom = view.findViewById(R.id.tv_nom_burger);
-        TextView ingr = view.findViewById(R.id.tv_ingredients_burger);
+        TextView nom = view.findViewById(R.id.a_nom);
+        TextView desc = view.findViewById(R.id.a_description);
 
-        Burger current = (Burger) getItem(i);
+        Activite current = (Activite) getItem(i);
 
         nom.setText(current.getNom());
-        ingr.setText(current.getIngredients());
+        desc.setText(current.getIngredients());
 
         return view;
     }

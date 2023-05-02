@@ -5,16 +5,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/a_nom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="22dp"
-        android:textColor="@color/primary"/>
-
+        android:textColor="@color/primary" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/a_description"
-        android:textSize="22dp"
-        android:textColor="@color/primary"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/a_description"/>
+
 </LinearLayout>

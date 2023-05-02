@@ -1,14 +1,11 @@
 package com.example.tas;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Burger {
+public class Activite {
 
     private String nom, ingredients;
     private float prix;
 
-    public Burger(String nom, String ingredients, float prix) {
+    public Activite(String nom, String ingredients, float prix) {
         this.nom = nom;
         this.ingredients = ingredients;
         this.prix = prix;
