@@ -17,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button my_activities;
     private Button my_profile;
     private ListView lv_a;
+    private ListView lv_b;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,12 @@ public class HomeActivity extends AppCompatActivity {
 
         ActiviteAdapter aa = new ActiviteAdapter(getActivites(), HomeActivity.this);
         this.lv_a.setAdapter(aa);
+
+
+        this.lv_b = findViewById(R.id.lv);
+
+        BurgerAdapter ba = new BurgerAdapter(getMenu(), HomeActivity.this);
+        this.lv_b.setAdapter(ba);
 
         this.my_activities.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +60,15 @@ public class HomeActivity extends AppCompatActivity {
         la.add(new Activite("Bowling", "Jeu de quilles"));
         la.add(new Activite("Karting", "Course de kart"));
         return la;
+    }
+
+    public List<Burger> getMenu(){
+        List<Burger> lb = new ArrayList<>();
+        lb.add(new Burger("Big Mac", "Pain, viande, salade, tomate, oignon, sauce", 5.5f));
+        lb.add(new Burger("Mc Chicken", "Pain, poulet, salade, tomate, oignon, sauce", 4.5f));
+        lb.add(new Burger("Royal Cheese", "Pain, viande, salade, tomate, oignon, sauce, fromage", 6.5f));
+        lb.add(new Burger("Mc Double", "Pain, viande x2, salade, tomate, oignon, sauce, fromage", 4.5f));lb.add(new Burger("Big Mac", "Pain, viande, salade, tomate, oignon, sauce", 5.5f));
+        return lb;
     }
 }
 
