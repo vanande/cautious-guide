@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".Login_form"></activity>
         <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".MyProfile"></activity>
     </application>
 
 </manifest>

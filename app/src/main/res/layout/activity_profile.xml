@@ -5,16 +5,35 @@
     android:orientation="vertical">
 
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@font/domine_semibold"
+        android:background="@color/secondary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icone"
+            android:src="@drawable/icone"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/domine_semibold"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:text="My profile"
         android:padding="16dp"
-        android:background="@color/secondary"
         android:textSize="24sp"/>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +44,7 @@
             android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@font/domine_semibold"
+            android:fontFamily="@font/domine_semibold"
             android:textColor="@color/secondary"
             android:textStyle="bold"
             android:text="Prenom"
@@ -38,7 +57,7 @@
             android:id="@+id/last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@font/domine_semibold"
+            android:fontFamily="@font/domine_semibold"
             android:textColor="@color/secondary"
             android:textStyle="bold"
             android:text="Nom"
@@ -59,7 +78,7 @@
             android:id="@+id/company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@font/domine_semibold"
+            android:fontFamily="@font/domine_semibold"
             android:textColor="@color/secondary"
             android:textStyle="bold"
             android:text="Company"
@@ -68,19 +87,31 @@
             android:layout_marginRight="32dp"
             android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/team"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@font/domine_semibold"
-            android:textColor="@color/secondary"
-            android:textStyle="bold"
-            android:text="Team"
-            android:layout_weight="0.3"
-            android:layout_margin="16dp"
-            android:textSize="16sp"/>
-
+        <!--        <TextView
+                    android:id="@+id/team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/domine_semibold"
+                    android:textColor="@color/secondary"
+                    android:textStyle="bold"
+                    android:text="Team"
+                    android:layout_weight="0.3"
+                    android:layout_margin="16dp"
+                    android:textSize="16sp"/>
+        -->
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter une info :"
+        android:fontFamily="@font/domine_semibold"
+        android:textColor="@color/secondary"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,8 +125,9 @@
         android:layout_margin="16dp"
         android:layout_marginRight="32dp"
         android:layout_weight="0.7"
-        android:text="Team"
+        android:fontFamily="@font/domine_semibold"
         android:textSize="16sp"
+        android:entries="@array/info_options"
         />
 
         <Button
@@ -108,7 +140,28 @@
             android:text="Submit"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mes infos :"
+        android:fontFamily="@font/domine_semibold"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:elegantTextHeight="true"
+        android:textColor="@color/primary"/>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv"
+        android:layout_margin="16dp"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_page"
+        />
 
 
 

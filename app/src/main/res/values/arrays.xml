@@ -26,16 +26,13 @@
     </string-array>
     <string-array name="info_options">
         <item>Sélectionnez une option</item>
-        <item>Enceinte</item>
-        <item>Obèse</item>
-        <item>Diabétique</item>
-        <item>Handicapé</item>
-        <item>Fragile</item>
-        <item>Autiste</item>
         <item>Sportif</item>
+        <item>Enceinte</item>
+        <item>Diabétique</item>
+        <item>Obèse</item>
+        <item>Handicapé</item>
         <item>Fumeur</item>
         <item>Allergies</item>
         <item>Végétarien</item>
-        <item>Prend des médicaments</item>
     </string-array>
 </resources>

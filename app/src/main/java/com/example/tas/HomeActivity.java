@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, MyProfile.class);
+                intent.putExtra("idp", getIntent().getIntExtra("idp", -1));
+                intent.putExtra("idc", getIntent().getIntExtra("idc", -1));
+                intent.putExtra("nom", getIntent().getStringExtra("nom"));
+                intent.putExtra("prenom", getIntent().getStringExtra("prenom"));
                 startActivity(intent);
             }
         });
@@ -96,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         ){
             @Override
             public byte[] getBody() {
-                return jsonBody.toString().getBytes();
+                return jsonBody.toString().getBytes(StandardCharsets.UTF_8);
             }
 
             @Override
