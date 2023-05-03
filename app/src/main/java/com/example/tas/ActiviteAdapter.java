@@ -49,7 +49,7 @@ public class ActiviteAdapter extends BaseAdapter {
         Activite current = (Activite) getItem(i);
 
         nom.setText(current.getNom());
-        desc.setText(current.getIngredients());
+        desc.setText(current.getDescription());
 
         return view;
     }

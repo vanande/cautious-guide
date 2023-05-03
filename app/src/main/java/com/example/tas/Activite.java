@@ -2,12 +2,12 @@ package com.example.tas;
 
 public class Activite {
 
-    private String nom, ingredients;
+    private String nom, description;
     private float prix;
 
-    public Activite(String nom, String ingredients, float prix) {
+    public Activite(String nom, String description, float prix) {
         this.nom = nom;
-        this.ingredients = ingredients;
+        this.description = description;
         this.prix = prix;
     }
 
@@ -19,12 +19,12 @@ public class Activite {
         this.nom = nom;
     }
 
-    public String getIngredients() {
-        return ingredients;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public float getPrix() {

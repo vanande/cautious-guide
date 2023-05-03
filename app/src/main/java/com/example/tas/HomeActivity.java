@@ -15,7 +15,6 @@ public class HomeActivity extends AppCompatActivity {
     private Button my_activities;
     private Button my_profile;
     private ListView lv_a;
-    private ListView lv_b;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +24,10 @@ public class HomeActivity extends AppCompatActivity {
         this.my_activities = findViewById(R.id.my_activities);
         this.my_profile = findViewById(R.id.my_profile);
 
-        this.lv_b = findViewById(R.id.lv);
+        this.lv_a = findViewById(R.id.lv);
 
-        ActiviteAdapter ba = new ActiviteAdapter(getMenu(), HomeActivity.this);
-        this.lv_b.setAdapter(ba);
+        ActiviteAdapter aa = new ActiviteAdapter(getActivities(), HomeActivity.this);
+        this.lv_a.setAdapter(aa);
 
         this.my_activities.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,13 +46,12 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public List<Activite> getMenu(){
-        List<Activite> lb = new ArrayList<>();
-        lb.add(new Activite("Big Mac", "Pain, viande, salade, tomate, oignon, sauce", 5.5f));
-        lb.add(new Activite("Mc Chicken", "Pain, poulet, salade, tomate, oignon, sauce", 4.5f));
-        lb.add(new Activite("Royal Cheese", "Pain, viande, salade, tomate, oignon, sauce, fromage", 6.5f));
-        lb.add(new Activite("Mc Double", "Pain, viande x2, salade, tomate, oignon, sauce, fromage", 4.5f));lb.add(new Activite("Big Mac", "Pain, viande, salade, tomate, oignon, sauce", 5.5f));
-        return lb;
+    public List<Activite> getActivities(){
+        List<Activite> la = new ArrayList<>();
+        la.add(new Activite("Paintball", "Jeu de tir en équipe", 5000f));
+        la.add(new Activite("Bowling", "Jeu de quilles", 3000f));
+        la.add(new Activite("Karting", "Course de kart", 10000f));
+        return la;
     }
 }
 
