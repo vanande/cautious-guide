@@ -2,11 +2,21 @@ package com.example.tas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +42,9 @@ public class HomeActivity extends AppCompatActivity {
         this.my_activities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, MyActivities.class);
-                startActivity(intent);
+                getActivities();
+                //Intent intent = new Intent(HomeActivity.this, MyActivities.class);
+                //startActivity(intent);
             }
         });
 
@@ -48,9 +59,53 @@ public class HomeActivity extends AppCompatActivity {
 
     public List<Activite> getActivities(){
         List<Activite> la = new ArrayList<>();
-        la.add(new Activite("Paintball", "Jeu de tir en équipe", "@drawable/icone"));
-        la.add(new Activite("Bowling", "Jeu de quilles", "@drawable/icone"));
-        la.add(new Activite("Karting", "Course de kart", "icone"));
+        String url = "https://togetherandstronger.fr:9000/salary/getActivities";
+        JSONObject jsonBody = new JSONObject();
+        try {
+            Log.i("idp", "getidp: " + getIntent().getIntExtra("idp", -1));
+            Log.i("idp", "getidc: " + getIntent().getIntExtra("idc", -1));
+            String idp_string = Integer.toString(getIntent().getIntExtra("idp", -1));
+            String idc_string = Integer.toString(getIntent().getIntExtra("idc", -1));
+
+            jsonBody.put("idc", idc_string);
+            jsonBody.put("idp", idp_string);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        JSONArray data = jsonResponse.getJSONArray("data");
+                        for(int i=0; i<data.length(); i++){
+                            JSONObject activity = data.getJSONObject(i);
+                            String nom = activity.getString("Nom");
+                            String description = activity.getString("Description");
+                            String image = activity.getString("Image");
+                            la.add(new Activite(nom, description, image));
+                        }
+                        ActiviteAdapter aa = new ActiviteAdapter(la, HomeActivity.this);
+                        lv_a.setAdapter(aa);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.e("Volley Error", error.toString());
+                }
+        ){
+            @Override
+            public byte[] getBody() {
+                return jsonBody.toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
         return la;
     }
 }

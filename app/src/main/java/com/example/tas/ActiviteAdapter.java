@@ -53,8 +53,8 @@ public class ActiviteAdapter extends BaseAdapter {
 
         nom.setText(current.getNom());
         desc.setText(current.getDescription());
-        img.setImageDrawable(context.getResources().getDrawable(R.drawable.icone));
-        //Picasso.get().load(current.getImage()).into(img);
+        //img.setImageDrawable(context.getResources().getDrawable(R.drawable.icone));
+        Picasso.get().load(current.getImage()).into(img);
 
         return view;
     }
