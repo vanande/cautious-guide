@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 
 import java.util.List;
 
@@ -18,8 +22,6 @@ public class ActiviteAdapter extends BaseAdapter {
         this.la = la;
         this.context = context;
     }
-
-
 
     @Override
     public int getCount() {
@@ -45,11 +47,14 @@ public class ActiviteAdapter extends BaseAdapter {
 
         TextView nom = view.findViewById(R.id.a_nom);
         TextView desc = view.findViewById(R.id.a_description);
+        ImageView img = view.findViewById(R.id.a_image);
 
         Activite current = (Activite) getItem(i);
 
         nom.setText(current.getNom());
         desc.setText(current.getDescription());
+        img.setImageDrawable(context.getResources().getDrawable(R.drawable.icone));
+        //Picasso.get().load(current.getImage()).into(img);
 
         return view;
     }

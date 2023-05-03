@@ -2,13 +2,12 @@ package com.example.tas;
 
 public class Activite {
 
-    private String nom, description;
-    private float prix;
+    private String nom, description, image;
 
-    public Activite(String nom, String description, float prix) {
+    public Activite(String nom, String description, String image) {
         this.nom = nom;
         this.description = description;
-        this.prix = prix;
+        this.image = image;
     }
 
     public String getNom() {
@@ -27,12 +26,12 @@ public class Activite {
         this.description = description;
     }
 
-    public float getPrix() {
-        return prix;
+    public String getImage() {
+        return image;
     }
 
-    public void setPrix(float prix) {
-        this.prix = prix;
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

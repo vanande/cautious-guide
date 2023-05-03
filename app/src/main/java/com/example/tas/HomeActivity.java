@@ -48,9 +48,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public List<Activite> getActivities(){
         List<Activite> la = new ArrayList<>();
-        la.add(new Activite("Paintball", "Jeu de tir en équipe", 5000f));
-        la.add(new Activite("Bowling", "Jeu de quilles", 3000f));
-        la.add(new Activite("Karting", "Course de kart", 10000f));
+        la.add(new Activite("Paintball", "Jeu de tir en équipe", "@drawable/icone"));
+        la.add(new Activite("Bowling", "Jeu de quilles", "@drawable/icone"));
+        la.add(new Activite("Karting", "Course de kart", "icone"));
         return la;
     }
 }
