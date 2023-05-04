@@ -2,6 +2,7 @@ package com.example.tas;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -55,16 +57,32 @@ public class MyProfile extends AppCompatActivity {
 
         this.spinner = findViewById(R.id.spinner);
 
-        InfoAdapter ia = new InfoAdapter(getSalaryInfos(), MyProfile.this);
-        this.lv_i.setAdapter(ia);
+        List<Info> infos = getSalaryInfos();
+            InfoAdapter ia = new InfoAdapter(infos, MyProfile.this);
+            this.lv_i.setAdapter(ia);
 
 
         this.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String info_nom = spinner.getSelectedItem().toString();
-                String info_id = LookForInfoID(info_nom);
-                Toast.makeText(MyProfile.this, "" + info_id, Toast.LENGTH_SHORT).show();
+                if (spinner.getSelectedItemPosition() == 0) {
+                    Toast.makeText(MyProfile.this, "Aucune info sélectionner", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyProfile.this);
+                builder.setTitle("Confirmation");
+                builder.setMessage("T'es sûr de vouloir envoyer ces infos ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String info_nom = spinner.getSelectedItem().toString();
+                        String info_id = spinner.getSelectedItemPosition() + "";
+                        sendInfo(info_id, String.valueOf(getIntent().getIntExtra("idp", -1)), String.valueOf(getIntent().getIntExtra("idc", -1)));
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
             }
         });
 
@@ -72,7 +90,19 @@ public class MyProfile extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Info info = (Info) adapterView.getAdapter().getItem(i);
-                Toast.makeText(MyProfile.this, info.getNom(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyProfile.this, info.getNom() + i, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyProfile.this);
+                builder.setTitle("Confirmation");
+                builder.setMessage("T'es sûr de vouloir delete ces infos ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteInfo(info.getId(), String.valueOf(getIntent().getIntExtra("idp", -1)), String.valueOf(getIntent().getIntExtra("idc", -1)));
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
             }
         });
 
@@ -85,6 +115,83 @@ public class MyProfile extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    private void sendInfo(String info_id, String idp, String idc) {
+        String url = "https://togetherandstronger.fr:9000/salary/addInfos";
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("idi", info_id);
+            jsonBody.put("idp", idp);
+            jsonBody.put("idc", idc);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        String message = jsonResponse.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.e("Volley Error", error.toString());
+                }
+        ) {
+            @Override
+            public byte[] getBody() {
+                return jsonBody.toString().getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void deleteInfo(String info_id, String idp, String idc) {
+        String url = "https://togetherandstronger.fr:9000/salary/deleteInfo";
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("idi", info_id);
+            jsonBody.put("idp", idp);
+            jsonBody.put("idc", idc);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        String message = jsonResponse.getString("message");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.e("Volley Error", error.toString());
+                }
+        ) {
+            @Override
+            public byte[] getBody() {
+                return jsonBody.toString().getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
 
     public void lookForCompany() {
         String url = "https://togetherandstronger.fr:9000/lookfor/LookForCompany";
@@ -127,17 +234,6 @@ public class MyProfile extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
         return;
-    }
-
-
-    public String LookForInfoID(String nom) {
-        List<Info> li = getInfoList();
-        Log.i("LI CONTENT", "LookForInfoID: " + li.size());
-        String id = "";
-        for (Info info : li) {
-            Log.i("idi", "LookForInfoID: " + info.getNom() + " " + info.getId() );
-        }
-        return id;
     }
 
     public List<Info> getInfoList(){
