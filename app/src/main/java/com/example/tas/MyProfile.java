@@ -62,9 +62,9 @@ public class MyProfile extends AppCompatActivity {
         this.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // SHOW HERE A TOAST WITN THE SELECTED ITEM
-                String info_id = LookForInfoID(spinner.getSelectedItem().toString());
-                Toast.makeText(MyProfile.this, "The id of "+ spinner.getSelectedItem().toString()+ " is "+info_id, Toast.LENGTH_SHORT).show();
+                String info_nom = spinner.getSelectedItem().toString();
+                String info_id = LookForInfoID(info_nom);
+                Toast.makeText(MyProfile.this, "" + info_id, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -130,17 +130,16 @@ public class MyProfile extends AppCompatActivity {
     }
 
 
-    public String LookForInfoID(String nom){
+    public String LookForInfoID(String nom) {
         List<Info> li = getInfoList();
-        Log.i(TAG, "LookForInfoID: " + li.toString());
+        Log.i("LI CONTENT", "LookForInfoID: " + li.size());
+        String id = "";
         for (Info info : li) {
-            Log.d("LookForInfoID", "LookForInfoID: " + info.getNom() + " " + info.getId());
-            if (info.getNom().equals(nom)) {
-                return info.getId();
-            }
+            Log.i("idi", "LookForInfoID: " + info.getNom() + " " + info.getId() );
         }
-        return null;
+        return id;
     }
+
     public List<Info> getInfoList(){
         List<Info> infoList = new ArrayList<>();
         String url = "https://togetherandstronger.fr:9000/list/infos";
