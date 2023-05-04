@@ -79,7 +79,12 @@ public class MyProfile extends AppCompatActivity {
                         String info_nom = spinner.getSelectedItem().toString();
                         String info_id = spinner.getSelectedItemPosition() + "";
                         sendInfo(info_id, String.valueOf(getIntent().getIntExtra("idp", -1)), String.valueOf(getIntent().getIntExtra("idc", -1)));
-                        ia.notifyDataSetChanged();
+                        Intent intent = new Intent(MyProfile.this, MyProfile.class);
+                        intent.putExtra("nom", getIntent().getStringExtra("nom"));
+                        intent.putExtra("prenom", getIntent().getStringExtra("prenom"));
+                        intent.putExtra("idp", getIntent().getIntExtra("idp", -1));
+                        intent.putExtra("idc", getIntent().getIntExtra("idc", -1));
+                        startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("No", null);
@@ -102,7 +107,12 @@ public class MyProfile extends AppCompatActivity {
                         infos.remove(info);
                         ia.notifyDataSetChanged();
                         deleteInfo(info.getId(), String.valueOf(getIntent().getIntExtra("idp", -1)), String.valueOf(getIntent().getIntExtra("idc", -1)));
-
+                        Intent intent = new Intent(MyProfile.this, MyProfile.class);
+                        intent.putExtra("nom", getIntent().getStringExtra("nom"));
+                        intent.putExtra("prenom", getIntent().getStringExtra("prenom"));
+                        intent.putExtra("idp", getIntent().getIntExtra("idp", -1));
+                        intent.putExtra("idc", getIntent().getIntExtra("idc", -1));
+                        startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("No", null);

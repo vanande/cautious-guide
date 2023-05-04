@@ -48,6 +48,10 @@ public class ActiviteAdapter extends BaseAdapter {
         TextView nom = view.findViewById(R.id.a_nom);
         TextView desc = view.findViewById(R.id.a_description);
         ImageView img = view.findViewById(R.id.a_image);
+        TextView heureDebut = view.findViewById(R.id.a_heureDebut);
+        TextView heureFin = view.findViewById(R.id.a_heureFin);
+        TextView dateDebut = view.findViewById(R.id.a_dateDebut);
+        TextView dateFin = view.findViewById(R.id.a_dateFin);
 
         Activite current = (Activite) getItem(i);
 
