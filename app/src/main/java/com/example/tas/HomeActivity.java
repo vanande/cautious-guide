@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
                             String heure_fin = activity.getString("HeureFin");
                             String date_debut = activity.getString("DateDebut");
                             String date_fin = activity.getString("DateFin");
-                            la.add(new Activite(nom, description, image, heure_debut, heure_fin, date_debut, date_fin));
+                            la.add(new Activite(nom, description, image, "Le : "+ date_debut, date_fin, "De : "+heure_debut, "A : "+heure_fin));
                         }
                         ActiviteAdapter aa = new ActiviteAdapter(la, HomeActivity.this);
                         lv_a.setAdapter(aa);
