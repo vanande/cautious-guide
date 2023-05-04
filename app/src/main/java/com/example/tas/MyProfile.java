@@ -58,8 +58,8 @@ public class MyProfile extends AppCompatActivity {
         this.spinner = findViewById(R.id.spinner);
 
         List<Info> infos = getSalaryInfos();
-            InfoAdapter ia = new InfoAdapter(infos, MyProfile.this);
-            this.lv_i.setAdapter(ia);
+        InfoAdapter ia = new InfoAdapter(infos, MyProfile.this);
+        this.lv_i.setAdapter(ia);
 
 
         this.submit.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +79,7 @@ public class MyProfile extends AppCompatActivity {
                         String info_nom = spinner.getSelectedItem().toString();
                         String info_id = spinner.getSelectedItemPosition() + "";
                         sendInfo(info_id, String.valueOf(getIntent().getIntExtra("idp", -1)), String.valueOf(getIntent().getIntExtra("idc", -1)));
+                        ia.notifyDataSetChanged();
                     }
                 });
                 builder.setNegativeButton("No", null);
@@ -98,7 +99,10 @@ public class MyProfile extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        infos.remove(info);
+                        ia.notifyDataSetChanged();
                         deleteInfo(info.getId(), String.valueOf(getIntent().getIntExtra("idp", -1)), String.valueOf(getIntent().getIntExtra("idc", -1)));
+
                     }
                 });
                 builder.setNegativeButton("No", null);
@@ -131,7 +135,8 @@ public class MyProfile extends AppCompatActivity {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         String message = jsonResponse.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        // Notify the adapter that the data has been changed
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -269,8 +274,6 @@ public class MyProfile extends AppCompatActivity {
         String url = "https://togetherandstronger.fr:9000/salary/getInfos";
         JSONObject jsonBody = new JSONObject();
         try {
-            Log.i("idp", "getidp: " + getIntent().getIntExtra("idp", -1));
-            Log.i("idp", "getidc: " + getIntent().getIntExtra("idc", -1));
             String idp_string = Integer.toString(getIntent().getIntExtra("idp", -1));
             String idc_string = Integer.toString(getIntent().getIntExtra("idc", -1));
 
@@ -283,6 +286,10 @@ public class MyProfile extends AppCompatActivity {
                 response -> {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
+                        if (jsonResponse.getString("data").equals("null")) {
+                            Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         JSONArray data = jsonResponse.getJSONArray("data");
                         for(int i = 0; i < data.length(); i++){
                             JSONObject info = data.getJSONObject(i);

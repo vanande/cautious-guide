@@ -21,13 +21,8 @@ public class Info {
         return nom;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Info) {
-            Info i = (Info) o;
-            return this.id.equals(i.getId());
-        }
-        return false;
+    public boolean equals(String id) {
+        return this.id.equals(id);
     }
 
     @Override
