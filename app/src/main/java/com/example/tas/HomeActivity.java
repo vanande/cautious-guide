@@ -82,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         JSONArray data = jsonResponse.getJSONArray("data");
+
                         for(int i=0; i<data.length(); i++){
                             JSONObject activity = data.getJSONObject(i);
                             String nom = activity.getString("Nom");
