@@ -73,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
             String idc_string = Integer.toString(getIntent().getIntExtra("idc", -1));
 
             jsonBody.put("idc", idc_string);
-            jsonBody.put("idp", idp_string);
+            jsonBody.put("id", idp_string);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

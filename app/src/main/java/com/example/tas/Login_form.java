@@ -115,9 +115,6 @@ public class Login_form extends AppCompatActivity {
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 requestQueue.add(stringRequest);
             }
-
         });
-
-
     }
 }
